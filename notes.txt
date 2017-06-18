@@ -1,0 +1,74 @@
+
+lab-6
+
+cookies
+
+stores info on page, expires, limited by domain and by portion of page
+name value domain associated with it
+
+set cookie comes back in respnse to url get
+
+cookies for log-ins
+
+session not permanent
+two kinds of cookies, session cookie ends when browser closes?
+
+where are cookies stored?
+
+tool redis for volatile stuff
+
+sql for stuff you want to keep
+
+middleware for using cookies
+
+cookieParser
+expresssession
+
+flash messages
+
+request.session is an object, can add new properties
+request.session.newTask= 15
+use that and then delete it
+delete request.session.newTask
+
+request.locals automatically passed to all templates
+eg request.locals.flashmessage
+
+
+project
+
+Authentication
+make:
+-User model
+-/users/register
+-users/login
+-users/logout
+-/users
+
+info on using sequelize
+http://gregtrowbridge.com/getting-started-with-sequelize-and-the-sequelize-cli/
+created new table "user"
+  $ npm run sequelize -- model:create --name User --attributes name:string
+git commit so can return to this point.
+
+does sequelize discriminate when adding "s" to table name?
+Yes! Added table "plurals" which sequelize inserted as "plurals" not "pluralss"
+
+add new column to table "users"
+  $ npm run sequelize migration:create
+this created a migration file with a migration skeleton in it
+for updating the model. Added to up function:
+      return queryInterface.addColumn('Users', 'password', Sequelize.STRING);
+and to the down function:
+      return queryInterface.removeColumn('Users', 'password');
+in real life, the password would be hashed and salted.
+
+after updating the migration file, save it then run it from command line
+  $ npm run sequelize db:migrate
+
+then update the model file models/user.js
+  password: DataTypes.STRING
+
+then added guest/password to users from the command line:
+      sqlite> insert into Users (name, password, createdAt, updatedAt)
+      values ('guest','password', datetime('now'), datetime('now'));
