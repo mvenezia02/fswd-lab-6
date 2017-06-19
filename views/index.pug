@@ -7,29 +7,37 @@ block header
     | file
 
 block body
-  if !true
-    p It's true!
+  //- if !true
+  //-   p It's true!
+  //- else
+  //-   p It's false.
+    
+  if loggedIn
+    h2 Welcome
+    .row
+      .col-sm-6
+        form.form-inline(method="POST" action="/users/logout")
+          button#add.btn.btn-default Logout    
   else
-    p It's false.
-  .row
-    .col-sm-6
-      form.form-inline(method="POST" action="/users/register")
-        div.form-group
-          label(for="name") Name
-            input.form-control(type="text" name="name" required)
-          label(for="password") Create Password
-            input.form-control(type="text" name="password" required)
-          label(for="confirmPassword") Confirm Password
-            input.form-control(type="text" name="confirmPassword" required)
-        button#add.btn.btn-default Create User Account
-    .col-sm-6
-      form.form-inline(method="POST" action="/users/login")
-        div.form-group
-          label(for="name") Name
-            input.form-control(type="text" name="name" required)
-          label(for="password") Create Password
-            input.form-control(type="text" name="password" required)
-        button#add.btn.btn-default Login
+    .row
+      .col-sm-6
+        form.form-inline(method="POST" id="register" action="/users/register")
+          div.form-group
+            label(for="name") Name
+              input.form-control(type="text" name="name" required)
+            label(for="password") Create Password
+              input.form-control(type="text" name="password" required)
+            label(for="confirmPassword") Confirm Password
+              input.form-control(type="text" name="confirmPassword" required)
+          button#add.btn.btn-default Create User Account
+      .col-sm-6
+        form.form-inline(method="POST" action="/users/login")
+          div.form-group
+            label(for="name") Name
+              input.form-control(type="text" name="name" required)
+            label(for="password") Create Password
+              input.form-control(type="text" name="password" required)
+          button#add.btn.btn-default Login
       
       
   //- ul
